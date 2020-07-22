@@ -1,6 +1,6 @@
 +++
 title = "Launching EC2 Spot instances via EC2 Auto Scaling Group"
-weight = 20
+weight = 130
 +++
 
 ## Creating a Launch Template 

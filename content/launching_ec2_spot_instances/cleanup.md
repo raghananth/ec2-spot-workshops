@@ -1,6 +1,6 @@
 +++
 title = "Clean Up"
-weight = 70
+weight = 150
 +++
 
 ### Delete Your Auto Scaling Group

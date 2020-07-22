@@ -1,6 +1,6 @@
 +++
 title = "Finding Running Spot Instances"
-weight = 60
+weight = 140
 +++
 
 ## Finding Running Spot Instances
