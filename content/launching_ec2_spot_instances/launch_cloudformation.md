@@ -23,7 +23,7 @@ Make sure you are in AWS Region designated by the facilitators of the workshop
 
 1. Click **Next**.
 
-1. In the **Specify stack details** section, enter a **Stack name**. For example, use *myEC2Workshop*. The stack name cannot contain spaces.
+1. In the **Specify stack details** section, enter a **Stack name**. For example, use *LaunchEC2Spot*. The stack name cannot contain spaces.
 
 1. [Optional] In the **Parameters** section, optionally change the **sourceCidr** to restrict instance ssh/http access and load balancer http access.
 

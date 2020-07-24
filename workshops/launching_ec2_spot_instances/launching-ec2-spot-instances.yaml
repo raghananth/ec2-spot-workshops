@@ -1,0 +1,265 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description : Launching EC2 Spot Instances
+
+Metadata:
+    Author:
+        Description: Ananth Raghavendra <raganant@amazon.com>
+    License:
+        Description: 'Copyright 2020 Amazon.com, Inc. and its affiliates. All Rights Reserved.
+
+            Licensed under the Amazon Software License (the "License"). You may not use this file
+            except in compliance with the License. A copy of the License is located at
+            http://aws.amazon.com/asl/
+            or in the "license" file accompanying this file. This file is distributed on an "AS IS"
+            BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+            License for the specific language governing permissions and limitations under the License.'
+
+Mappings:
+    CidrMappings:
+        vpc:
+            CIDR: 10.0.0.0/16
+        public-subnet-1:
+            CIDR: 10.0.1.0/24
+        public-subnet-2:
+            CIDR: 10.0.2.0/24
+        
+Resources:
+    #### This template creates the following in order
+    ####    Create a private network
+    ####        VPC Definition
+    ####    Make private network talk to Internet and security
+    ####        Internet Gateway
+    ####        Attach Internet Gateway to VPC
+    ####        Create a routing table
+    ####        Attach routing table and internet gateway via route(r)
+    ####    Create security and roles
+    ####        Create a security group for load balancer
+    ####        Create a IAM role for tagging EC2 Spot Fleet
+    ####    Create public subnets
+    ####        Create a subnet
+    ####        Associate subnet to routing table
+    ####        Create a second subnet
+    ####        Associate second subnet to routing table
+    ####    Create a Cloud9 environment in public subnet 1
+    
+    # VPC Definition
+    vpc:
+        Type: AWS::EC2::VPC
+        Properties:
+            CidrBlock:
+                Fn::FindInMap:
+                - CidrMappings
+                - vpc
+                - CIDR
+            EnableDnsHostnames: true
+            EnableDnsSupport: true
+            InstanceTenancy: default
+            Tags:
+                - Key: Name
+                  Value: EC2 Spot Fleet vpc workshop
+
+    # Internet Gateway to vpc for incoming/outgoing internet traffic
+    internetGateway:
+        DependsOn:
+            - vpc
+        Type: AWS::EC2::InternetGateway
+        Properties: 
+            Tags:
+                - Key: Name
+                  Value: Internet gateway workshop
+              
+    # Attach internet gateway to vpc
+    attachGateway:
+        DependsOn:
+            - vpc
+            - internetGateway
+        Type: AWS::EC2::VPCGatewayAttachment
+        Properties: 
+            InternetGatewayId: 
+                Ref: internetGateway
+            VpcId:
+                Ref: vpc
+                
+    # Create a routing table 
+    publicRouteTable:
+        DependsOn:
+            - vpc
+            - attachGateway
+        Type: AWS::EC2::RouteTable
+        Properties: 
+            Tags: 
+                - Key: Name
+                  Value: Public route table workshop
+            VpcId:
+                Ref: vpc
+                
+    # Attach routing table and internet gateway via route(r)
+    publicRoute:
+        DependsOn:
+            - publicRouteTable
+            - internetGateway
+            - attachGateway
+        Type: AWS::EC2::Route
+        Properties:
+            DestinationCidrBlock: 0.0.0.0/0
+            GatewayId:
+                Ref: internetGateway
+            RouteTableId:
+                Ref: publicRouteTable
+
+    # Create a Security Group for the load balancer
+    loadBalancerSecurityGroup:
+        DependsOn:
+            - vpc
+        Type: AWS::EC2::SecurityGroup
+        Properties: 
+            GroupDescription: allow http 0.0.0.0/0
+            SecurityGroupIngress: 
+            - CidrIp: 0.0.0.0/0
+              Description: Allow http from all ips
+              FromPort: 80
+              IpProtocol: tcp
+              ToPort: 80
+            Tags: 
+                - Key: Name
+                  Value: Load balancer security group
+            VpcId:
+                Ref: vpc
+            
+    # Create a IAM role for tagging EC2 Spot Fleet
+    spotFleetRole:
+        Type: AWS::IAM::Role
+        Properties: 
+            AssumeRolePolicyDocument:
+                Version: '2012-10-17'
+                Statement: 
+                    - Effect: 'Allow'
+                      Principal: 
+                        Service: 
+                        - spotfleet.amazonaws.com
+                      Action: 
+                      - sts:AssumeRole
+            Description: IAM role for tagging EC2 Spot Fleet
+            ManagedPolicyArns: 
+            - arn:aws:iam::aws:policy/service-role/AmazonEC2SpotFleetTaggingRole
+            Path: /
+            Tags: 
+                - Key: Name
+                  Value: Load balancer security group
+
+    # Create the first subnet which will be public
+    publicSubnet1:
+        DependsOn:
+            - attachGateway
+        Type: AWS::EC2::Subnet
+        Properties:
+            AvailabilityZone: 
+                Fn::Select:
+                - 0
+                - Fn::GetAZs:
+                    Ref: AWS::Region
+            CidrBlock: 
+                Fn::FindInMap:
+                - CidrMappings
+                - public-subnet-1
+                - CIDR
+            MapPublicIpOnLaunch: true
+            Tags: 
+                - Key: Name
+                  Value: public subnet 1 workshop
+            VpcId: 
+                Ref: vpc
+                
+    # Associate first subnet to routing table
+    publicSubnet1RouteTableAssociation:
+        DependsOn:
+            - publicRouteTable
+            - publicSubnet1
+            - attachGateway
+        Type: AWS::EC2::SubnetRouteTableAssociation
+        Properties: 
+            RouteTableId:
+                Ref: publicRouteTable
+            SubnetId: 
+                Ref: publicSubnet1
+
+    # Create the second subnet
+    publicSubnet2:
+        DependsOn:
+            - attachGateway
+        Type: AWS::EC2::Subnet
+        Properties:
+            AvailabilityZone: 
+                Fn::Select:
+                - 1
+                - Fn::GetAZs:
+                    Ref: AWS::Region
+            CidrBlock: 
+                Fn::FindInMap:
+                - CidrMappings
+                - public-subnet-2
+                - CIDR
+            MapPublicIpOnLaunch: true
+            Tags: 
+                - Key: Name
+                  Value: public subnet 2 workshop
+            VpcId: 
+                Ref: vpc
+                
+    # Associate second subnet to routing table
+    publicSubnet2RouteTableAssociation:
+        DependsOn:
+            - publicRouteTable
+            - publicSubnet2
+            - attachGateway
+        Type: AWS::EC2::SubnetRouteTableAssociation
+        Properties: 
+            RouteTableId:
+                Ref: publicRouteTable
+            SubnetId: 
+                Ref: publicSubnet2
+
+    # Create a Cloud9 environment in public subnet 1
+    cloud9Environment:
+        Type: AWS::Cloud9::EnvironmentEC2
+        Properties:
+            Name: RunningEC2Spot 
+            Description: Running Amazon EC2 Spot Instances - cloud9 environment
+            InstanceType: t2.micro
+            SubnetId:
+                Ref: publicSubnet1
+
+Outputs:
+    awsRegionId:
+        Description: The AWS Region ID your template was launched in
+        Value:
+            Ref: AWS::Region
+    loadBalancerSecurityGroup:
+        Description: Load Balancer security group
+        Value:
+            Ref: loadBalancerSecurityGroup
+    vpc:
+        Description: The VPC
+        Value:
+            Ref: vpc
+    publicSubnet1:
+        Description: Public subnet 1
+        Value:
+            Ref: publicSubnet1
+    publicSubnet2:
+        Description: Public subnet 2
+        Value:
+            Ref: publicSubnet2
+    spotFleetRole:
+        Description: Spot Fleet role
+        Value:
+            Fn::GetAtt:
+            - spotFleetRole
+            - Arn
+    cloud9Environment:
+        Description: Cloud9 environment
+        Value:
+            Fn::GetAtt:
+            - cloud9Environment
+            - Name

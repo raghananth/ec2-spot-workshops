@@ -11,7 +11,7 @@ line, use the run-instances AWS CLI command and specify the
 parameter.
 
 ```bash
-$ aws ec2 run-instances --launch-template LaunchTemplateName=TemplateForSpot,Version=1 --instance-market-options MarketType=spot
+$ aws ec2 run-instances --launch-template LaunchTemplateName=SpotInstanceTemplate,Version=1 --instance-market-options MarketType=spot --subnet-id $publicSubnet1
 ```
 
 That is all there is to it\! You can see your Spot Instance request in
