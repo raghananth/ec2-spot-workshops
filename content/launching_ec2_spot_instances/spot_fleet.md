@@ -1,6 +1,6 @@
 +++
 title = "Launching EC2 Spot Instances via Spot Fleet"
-weight = 110
+weight = 120
 +++
 
 ## Launching EC2 Spot Instances via a Spot Fleet request
@@ -9,36 +9,29 @@ You can create a Spot Fleet request and specify a launch template in the
 instance configuration. When Amazon EC2 fulfills the Spot Fleet request,
 it uses the launch parameters defined in the associated launch template.
 
-**To create a Spot Fleet request using the recommended settings**
+**To create a new EC2 Fleet using the command line, run the following**
 
-1. Open the Spot console at <https://console.aws.amazon.com/ec2spot>.
+1. Open [**config.json**] (https://raw.githubusercontent.com/raghananth/ec2-spot-workshops/update-launch-ec2-spot-instance-workshop/workshops/launching_ec2_spot_instances/config.yaml) **NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING** on the Cloud9 editor and review the configuration. Pay special attention at the Overrides and the InstancesDistribution configuration blocks and try to guess how many instances of which instance types will be launched. 
 
-1. If you are new to Spot, you see a welcome page; choose **Get started**. 
-Otherwise, choose **Request Spot Instances**.
+2. You will notice there are placeholder values for %publicSubnet1%, %publicSubnet2%, %launchTemplateId% and %accountId%. To update the configuration file with the outputs from the CloudFormation template, execute the following command:
 
-1. For **Tell us your application or task need**, choose **Flexible workloads**.
+    ```bash
+    $ sed -i.bak -e "s#%publicSubnet1%#$publicSubnet1#g" -e "s#%publicSubnet2%#$publicSubnet2#g" -e "s#%accountId%#$accountId#g" -e "s#%launchTemplateId%#$launchTemplateId#g" config.json 
+    ```
 
-1. Under **Configure your instances:**
-    - For **Launch template**, select the Launch template you created earlier.
-    - Leave the **Minimum compute** unit values as default.
-    - For **Network**, select the VPC in which the subnet used in the launch template belongs.
-    - Under **Availability Zone**, check all of the availability zones that have an available subnet.
+3. Save the file and create the spot fleet:
 
-1. Under **Tell us how much capacity you need**, for **Total target capacity**, 
-specify **6 vCPUs**, and for **Optional On-Demand
-    portion**, specify **2 vCPUs**.
+    ```bash
+    $ aws ec2 request-spot-fleet --spot-fleet-request-config file://config.json
+    ```
 
-1. Check the box for **Maintain target capacity**. Leave the **Interruption behavior** as **Terminate**.
+    **Example return**
 
-1. Review the recommended **Fleet request settings** based on your application or task selection, 
-and choose **Launch**.
-
-The request type is fleet. When the request is fulfilled, requests of
-type instance are added, where the state is active and the status
-is fulfilled.
-
-![Spot Fleet Request](/images/launching_ec2_spot_instances/spot_fleet_request_image_2.png)
-
+    ```bash
+    {
+        "SpotFleetRequestId": "sfr-b5988c3c-e5a3-4648-ac71-88eaf0f4c11e"
+    }
+    ```
 
 ## Monitoring Your Spot Fleet
 
@@ -46,11 +39,8 @@ The Spot Fleet launches Spot Instances when your maximum price exceeds
 the Spot price and capacity is available. The Spot Instances run until
 they are interrupted or you terminate them.
 
-**To monitor your Spot Fleet using the console**
+To view the spot fleet details:
 
-1. Open the Amazon EC2 console at <https://console.aws.amazon.com/ec2/>.
-1. In the navigation pane, choose **Spot Requests**.
-1. Select your Spot Fleet request. The configuration details are
-available in the **Description** tab.
-1. To list the Spot Instances for the Spot Fleet, choose the **Instances** tab.
-1.  To view the history for the Spot Fleet, choose the **History** tab.
+```bash
+$ aws ec2 describe-spot-fleet-requests --spot-fleet-request-ids sfr-b5988c3c-e5a3-4648-ac71-88eaf0f4c11e
+```

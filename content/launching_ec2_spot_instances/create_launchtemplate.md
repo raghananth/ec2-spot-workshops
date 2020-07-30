@@ -30,35 +30,34 @@ use.
 
 2. The variable %ami-id% should contain the latest Amazon Linux 2 AMI, and instanceProfile and instanceSecurityGroup need to be populated with the resources created by your CloudFormation stack; which are available as Stack Outputs. We can pull the latest Amazon Linux 2 AMI with the AWS CLI, and as we have loaded our CloudFormation stack outputs as environment variables on a previous step, for convenience we can use the following commands to update your configuration file:
 
-```bash
-export ami_id=$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2' 'Name=state,Values=available' --output json | jq -r '.Images |   sort_by(.CreationDate) | last(.[]).ImageId')
-```
-    
+    ```bash
+    $ export ami_id=$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2' 'Name=state,Values=available' --output json | jq -r '.Images |   sort_by(.CreationDate) | last(.[]).ImageId')
+    ```
+
 3. Once you've gathered the data, create the launch template from the command line as follows (be sure to change the following values: **SubnetId**, **ImageId**, **InstanceType**, **Tags** - **Value**):
 
-
-```
-aws ec2 create-launch-template --region $awsRegionId --launch-template-name SpotInstanceTemplate --version-description TemplateForSpotVersion1 --launch-template-data "{\"ImageId\":\"$ami_id\",\"InstanceType\":\"m4.large\",\"TagSpecifications\":[{\"ResourceType\":\"instance\",\"Tags\":[{\"Key\":\"Name\",\"Value\":\"EC2SpotImmersionDay\"}]}]}"
-```
-
-**Example return**
-
-```bash
-{
-    "LaunchTemplate": {
-        "LaunchTemplateId": "lt-0e550c0e16efb3829",
-        "LaunchTemplateName": "SpotInstanceTemplate",
-        "CreateTime": "2020-07-24T21:52:32.000Z",
-        "CreatedBy": "arn:aws:iam::123456789012:user/xxxxxxxx",
-        "DefaultVersionNumber": 1,
-        "LatestVersionNumber": 1
+    ```bash
+    $ aws ec2 create-launch-template --region $awsRegionId --launch-template-name SpotInstanceTemplate --version-description SpotInstanceTemplateVersion1 --launch-template-data "{\"ImageId\":\"$ami_id\",\"InstanceType\":\"m4.large\",\"TagSpecifications\":[{\"ResourceType\":\"instance\",\"Tags\":[{\"Key\":\"Name\",\"Value\":\"EC2SpotImmersionDay\"}]}]}"
+    ```
+    **Example return**
+    ```bash
+    {
+        "LaunchTemplate": {
+            "LaunchTemplateId": "lt-0e550c0e16efb3829",
+            "LaunchTemplateName": "SpotInstanceTemplate",
+            "CreateTime": "2020-07-24T21:52:32.000Z",
+            "CreatedBy": "arn:aws:iam::123456789012:user/xxxxxxxx",
+            "DefaultVersionNumber": 1,
+            "LatestVersionNumber": 1
+        }
     }
-}
-```
-
+    ```
 {{% notice info %}}
-Note the **LaunchTemplateId** (eg. "lt-0e550c0e16efb3829") or
-**LaunchTemplateName** (eg. "SpotInstanceTemplate") of the newly created 
-Launch Template for the next steps.
+Note the **LaunchTemplateId** (eg. "lt-0e550c0e16efb3829") or **LaunchTemplateName** (eg. "SpotInstanceTemplate") of the newly created Launch Template for the next steps.
 {{% /notice %}}
 
+4. During the workshop, you will need to modify the configuration files to refer to the newly created LaunchTemplate. To reduce copy and paste, we will store the output **LaunchTemplateId** to environment variable.
+
+    ```bash
+    $ export launchTemplateId=$(aws ec2 describe-launch-templates --launch-template-name SpotInstanceTemplate | jq -r ".LaunchTemplates[].LaunchTemplateId")
+    ```

@@ -9,7 +9,8 @@ To save time on the initial setup, a CloudFormation template will be used to cre
 
 #### To create the stack
 
-1. You can view and download the CloudFormation template from GitHub [here](https://raw.githubusercontent.com/awslabs/ec2-spot-workshops/master/workshops/ec2-auto-scaling-with-multiple-instance-types-and-purchase-options/ec2-auto-scaling-with-multiple-instance-types-and-purchase-options.yaml).
+1. You can view and download the CloudFormation template from GitHub [here](https://raw.githubusercontent.com/raghananth/ec2-spot-workshops/update-launch-ec2-spot-instance-workshop/workshops/launching_ec2_spot_instances/launching-ec2-spot-instances.yaml). 
+**NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING**
                                                                             
 1. Take a moment to review the CloudFormation template so you understand the resources it will be creating.
 

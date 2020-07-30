@@ -1,0 +1,50 @@
+{
+    "IamFleetRole": "arn:aws:iam::%accountId%:role/aws-ec2-spot-fleet-tagging-role",
+    "AllocationStrategy": "capacityOptimized",
+    "TargetCapacity": 1,
+    "ValidFrom": "2020-07-29T20:23:44Z",
+    "ValidUntil": "2021-07-29T20:23:44Z",
+    "TerminateInstancesWithExpiration": true,
+    "LaunchSpecifications": [],
+    "Type": "maintain",
+    "LaunchTemplateConfigs": [
+        {
+            "LaunchTemplateSpecification": {
+                "LaunchTemplateId": "%launchTemplateId%",
+                "Version": "1"
+            },
+            "Overrides": [
+                {
+                    "InstanceType": "m4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet1%"
+                },
+                {
+                    "InstanceType": "m4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet2%"
+                },
+                {
+                    "InstanceType": "r4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet1%"
+                },
+                {
+                    "InstanceType": "r4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet2%"
+                },
+                {
+                    "InstanceType": "c4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet1%"
+                },
+                {
+                    "InstanceType": "c4.large",
+                    "WeightedCapacity": 1,
+                    "SubnetId": "%publicSubnet2%"
+                }
+            ]
+        }
+    ]
+}

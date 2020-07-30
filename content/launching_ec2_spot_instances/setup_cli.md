@@ -5,6 +5,6 @@ weight = 50
 
 1. Install dependencies for use in the workshop by running:
 
-	```
-	sudo yum -y install jq
+	```bash
+	$ sudo yum -y install jq
 	```

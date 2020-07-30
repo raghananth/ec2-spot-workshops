@@ -11,6 +11,12 @@ yourself.
 Now that we've launched Spot Instances via RunInstances, Spot Fleet, EC2
 Fleet, and an Auto Scaling group, let's go check them out.
 
+**To find running Spot Instances with CLI**
+
+```bash
+$ aws ec2 describe-instances --filters Name=instance-lifecycle,Values=spot
+```
+
 **To find running Spot Instances using the console**
 
 1. Open the Amazon EC2 console at <https://console.aws.amazon.com/ec2/>.
