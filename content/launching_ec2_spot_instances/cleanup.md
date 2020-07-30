@@ -21,13 +21,6 @@ and terminate all of the running instances.
 ```bash
 $ aws ec2 delete-fleets --fleet-id fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183 --terminate-instances 
 ```
-<!--
-**To delete all EC2 Fleet and terminate the running instances**
-
-```bash
-$ for fleet_id in $(aws ec2 describe-fleets | jq -r ".Fleets[].FleetId") ; do aws ec2 delete-fleets --fleet-id $fleet_id --terminate-instances; done 
-```
--->
 
 ### Cancelling your Spot Fleet Request
 
@@ -63,4 +56,14 @@ a launch template deletes all of its versions.
 
 ```bash
 $ aws ec2 delete-launch-template --launch-template-name SpotInstanceTemplate
+```
+
+### Deleting the Cloud​Formation stack
+
+Finally, delete the CloudFormation stack itself.
+
+**To delete the CloudFormation stack**
+
+```bash
+$ aws cloudformation delete-stack --stack-name $stack_name
 ```
