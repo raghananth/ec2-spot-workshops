@@ -20,8 +20,8 @@ Then, the *InstancesDistribution* configuration block determines how EC2 AutoSca
   * **OnDemandPercentageAboveBaseCapacity** is set to 0 so all the additional instances will be launched as Spot Instances
   * **SpotAllocationStrategy** is lowest-price, which instructs AutoScaling to pick the cheapest instance type on each Availability Zone.
   * **SpotInstancePools** is 4, which tells AutoScaling to launch instances across the 4 cheapest instance types on each Availability Zone for the list of instances provided on the overrides; diversifying our fleet acquiring capacity from multiple *Spot pools* and reducing the likelihood of a large portion of our fleet to be interrupted in a short period of time. 
-
 {{% /expand %}}
+
 2. You will notice there are placeholder values for **%publicSubnet1%** and **%publicSubnet2%**. To update the configuration file with the outputs from the CloudFormation template, execute the following command:
 
     ```bash
