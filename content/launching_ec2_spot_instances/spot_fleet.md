@@ -11,7 +11,7 @@ it uses the launch parameters defined in the associated launch template.
 
 **To create a new EC2 Fleet using the command line, run the following**
 
-1. Open [**config.json**] (https://raw.githubusercontent.com/raghananth/ec2-spot-workshops/update-launch-ec2-spot-instance-workshop/workshops/launching_ec2_spot_instances/config.yaml) **NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING** on the Cloud9 editor and review the configuration. Pay special attention at the Overrides and the InstancesDistribution configuration blocks and try to guess how many instances of which instance types will be launched. 
+1. Open [**config.json**] (https://raw.githubusercontent.com/raghananth/ec2-spot-workshops/update-launch-ec2-spot-instance-workshop/workshops/launching_ec2_spot_instances/config.json) **NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING** on the Cloud9 editor and review the configuration. Pay special attention at the Overrides and the InstancesDistribution configuration blocks and try to guess how many instances of which instance types will be launched. 
 
 2. You will notice there are placeholder values for %publicSubnet1%, %publicSubnet2%, %launchTemplateId% and %accountId%. To update the configuration file with the outputs from the CloudFormation template, execute the following command:
 

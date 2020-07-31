@@ -60,7 +60,7 @@ $ aws ec2 delete-launch-template --launch-template-name SpotInstanceTemplate
 
 ### Deleting the Cloud​Formation stack
 
-Finally, delete the CloudFormation stack itself.
+Finally, delete the CloudFormation stack itself. This will delete the Cloud9 environment along with the initial VPC and subnets created.
 
 **To delete the CloudFormation stack**
 
