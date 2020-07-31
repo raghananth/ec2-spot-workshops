@@ -17,11 +17,11 @@ With launch templates, you can also provision capacity across multiple instance 
 
   Then, the *InstancesDistribution* configuration block determines how EC2 AutoScaling picks the instance types to use, while at the same time it keeps a balanced number of EC2 instances per Availability Zone.
 
-  * The **prioritized** allocation strategy for on-demand instances makes AutoScaling try to launch the first instance type of your list and skip to the next instance type if for any reason it's unable to launch it (e.g. temporary unavailability of capacity). This is particularly useful if you have Reserved Instances for your baseline capacity, so AutoScaling launches the instance type matching your reservations.
-  * **OnDemandBaseCapacity** is set to 2, meaning the first two EC2 instances launched by EC2 AutoScaling will be on-demand.
-  * **OnDemandPercentageAboveBaseCapacity** is set to 0 so all the additional instances will be launched as Spot Instances
-  * **SpotAllocationStrategy** is lowest-price, which instructs AutoScaling to pick the cheapest instance type on each Availability Zone.
-  * **SpotInstancePools** is 4, which tells AutoScaling to launch instances across the 4 cheapest instance types on each Availability Zone for the list of instances provided on the overrides; diversifying our fleet acquiring capacity from multiple *Spot pools* and reducing the likelihood of a large portion of our fleet to be interrupted in a short period of time. 
+* The **prioritized** allocation strategy for on-demand instances makes AutoScaling try to launch the first instance type of your list and skip to the next instance type if for any reason it's unable to launch it (e.g. temporary unavailability of capacity). This is particularly useful if you have Reserved Instances for your baseline capacity, so AutoScaling launches the instance type matching your reservations.
+* **OnDemandBaseCapacity** is set to 2, meaning the first two EC2 instances launched by EC2 AutoScaling will be on-demand.
+* **OnDemandPercentageAboveBaseCapacity** is set to 0 so all the additional instances will be launched as Spot Instances
+* **SpotAllocationStrategy** is lowest-price, which instructs AutoScaling to pick the cheapest instance type on each Availability Zone.
+* **SpotInstancePools** is 4, which tells AutoScaling to launch instances across the 4 cheapest instance types on each Availability Zone for the list of instances provided on the overrides; diversifying our fleet acquiring capacity from multiple *Spot pools* and reducing the likelihood of a large portion of our fleet to be interrupted in a short period of time. 
 
 {{% /expand %}}
 
