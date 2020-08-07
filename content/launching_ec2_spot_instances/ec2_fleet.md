@@ -5,14 +5,11 @@ weight = 110
 
 ## Launching EC2 Spot Instances with On-Demand Instances via an EC2 Fleet
 
-An *EC2 Fleet* contains the configuration information to launch a
-fleet—or group—of instances. In a single API call, a fleet can launch
-multiple instance types across multiple Availability Zones, using the
-On-Demand Instance, Reserved Instance, and Spot Instance purchasing
-models together. Using EC2 Fleet, you can define separate On-Demand and
-Spot capacity targets, specify the instance types that work best for
-your applications, and specify how Amazon EC2 should distribute your
-fleet capacity within each purchasing model.
+An *EC2 Fleet* contains the configuration information to launch a fleet—or group—of instances. In a single API call, a fleet can launch
+multiple instance types across multiple Availability Zones, using the On-Demand Instance, Reserved Instance, and Spot Instance purchasing
+models together. Using EC2 Fleet, you can define separate On-Demand and Spot capacity targets, specify the instance types that work best for your applications, and specify how Amazon EC2 should distribute your fleet capacity within each purchasing model.
+
+EC2 Fleet could be used to provision EC2 Spot instances if multiple configuration options (i.e different EBS volume sizes for different instance types) and multiple launch templates are needed to create the EC2 instances. Unlike EC2 Auto Scaling, EC2 Fleet does not ensure that instances are spread across all AZs. In most cases, EC2 Auto Scaling is the preferred over EC2 Fleet.
 
 **To create a new EC2 Fleet using the command line, run the following**
 
@@ -24,7 +21,7 @@ $ aws ec2 create-fleet --launch-template-configs LaunchTemplateSpecification="{L
 
 ```bash
 {
-"FleetId": "fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183"
+    "FleetId": "fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183"
 }
 ```
 
@@ -38,7 +35,7 @@ $ aws ec2 describe-fleets --fleet-ids fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183
 
 and
 
-```
+```bash
 $ aws ec2 describe-fleet-instances --fleet-id fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183
 ```
 
