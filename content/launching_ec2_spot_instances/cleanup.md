@@ -33,17 +33,17 @@ You must specify whether the Spot Fleet should terminate its Spot Instances. If 
 $ aws ec2 cancel-spot-fleet-requests --spot-fleet-request-ids sfr-b5988c3c-e5a3-4648-ac71-88eaf0f4c11e --terminate-instances 
 ```
 
-### Terminating a Spot Instance
+### Terminating your Spot Instance
 
-Terminating a Spot Instance request does not terminate the Spot instance. Terminate the Spot Instance Request and the Spot Instance
+Terminating a Spot Instance request does not terminate the Spot instance. Terminate the Spot Instance Request and the Spot Instance.
 
-**To terminate a Spot Instance Request**
+**To terminate your Spot Instance Request**
 
 ```bash
 $ aws ec2 cancel-spot-instance-requests --spot-instance-request-id sir-wxz8bjpq
 ```
 
-**To terminate a Spot Instance using the console**
+**To terminate your Spot Instance using the console**
 
 Go to [EC2 Instances] (https://console.aws.amazon.com/ec2/v2/home?#Instances). 
 
@@ -51,12 +51,11 @@ Select the instance with Name as *EC2SpotImmersionDay* and status is *running*.
 
 Click on Actions, Instance State, then Terminate. 
 
-### Deleting a Launch Template
+### Deleting the Launch Template
 
-If you no longer require a launch template, you can delete it. Deleting
-a launch template deletes all of its versions.
+If you no longer require the launch template, you can delete it. Deleting the launch template deletes all of its versions.
 
-**To delete a launch template**
+**To delete the launch template**
 
 ```bash
 $ aws ec2 delete-launch-template --launch-template-name SpotInstanceTemplate
