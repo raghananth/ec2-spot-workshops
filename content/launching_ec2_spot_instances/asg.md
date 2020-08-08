@@ -36,6 +36,7 @@ EC2 Auto Scaling supports all the latest allocation strategies for EC2 Spot.
     ```bash
     $ aws autoscaling create-auto-scaling-group --cli-input-json file://asg.json
     ```
+
 {{% notice note %}}
 This command will not return any output if it is successful.
 {{% /notice %}}

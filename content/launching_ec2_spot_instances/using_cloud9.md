@@ -10,11 +10,9 @@ An AWS Cloud9 environment was launched as a part of the CloudFormation stack (yo
 You'll be using this Cloud9 environment to execute the steps in the workshop, and not the local command line on your computer.
 {{% /notice %}}
 
-1. Find the name of the AWS Cloud9 environment by checking the value of **cloud9Environment** in the CloudFormation stack outputs.
-
 1. Sign in to the [AWS Cloud9 console](https://console.aws.amazon.com/cloud9/).
 
-1. Find the Cloud9 environment in **Your environments**, and click **Open IDE**.
+1. Find the Cloud9 environment *RunningEC2Spot* in **Your environments**, and click **Open IDE**.
 {{% notice note %}}
 Please make sure you are using the Cloud9 environment created by the workshop CloudFormation stack!
 {{% /notice %}}

@@ -18,15 +18,13 @@ To save time on the initial setup, a CloudFormation template will be used to cre
 {{% notice note %}}
 Make sure you are in AWS Region designated by the facilitators of the workshop
 {{% /notice %}}
-1. Click **Create stack**.
+1. Click **Create stack**, then **With new resources (standard)**.
 
 1. In the **Specify template** section, select **Upload a template file**. Click **Choose file** and, select the template you downloaded in step 1.
 
 1. Click **Next**.
 
-1. In the **Specify stack details** section, enter a **Stack name**. For example, use *LaunchEC2Spot*. The stack name cannot contain spaces.
-
-1. [Optional] In the **Parameters** section, optionally change the **sourceCidr** to restrict instance ssh/http access and load balancer http access.
+1. In the **Specify stack details** section, enter a **Stack name**. Use *LaunchEC2Spot* as the stack name. The stack name cannot contain spaces.
 
 1. Click **Next**.
 

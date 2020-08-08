@@ -24,14 +24,8 @@ $ aws ec2 delete-fleets --fleet-id fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183 --
 
 ### Cancelling your Spot Fleet Request
 
-When you are finished using your Spot Fleet, you can cancel the Spot
-Fleet request. This cancels all Spot requests associated with the Spot
-Fleet, so that no new Spot Instances are launched for your Spot Fleet.
-You must specify whether the Spot Fleet should terminate its Spot
-Instances. If you terminate the instances, the Spot Fleet request enters
-the cancelled\_terminating state. Otherwise, the Spot Fleet request
-enters the cancelled\_running state and the instances continue to run
-until they are interrupted or you terminate them manually.
+When you are finished using your Spot Fleet, you can cancel the Spot Fleet request. This cancels all Spot requests associated with the Spot Fleet, so that no new Spot Instances are launched for your Spot Fleet.
+You must specify whether the Spot Fleet should terminate its Spot Instances. If you terminate the instances, the Spot Fleet request enters the cancelled\_terminating state. Otherwise, the Spot Fleet request enters the cancelled\_running state and the instances continue to run until they are interrupted or you terminate them manually.
 
 **To cancel and delete your EC2 Spot Fleet and terminate the running instances**
 
@@ -41,11 +35,21 @@ $ aws ec2 cancel-spot-fleet-requests --spot-fleet-request-ids sfr-b5988c3c-e5a3-
 
 ### Terminating a Spot Instance
 
-**To terminate a Spot Instance using the console**
+Terminating a Spot Instance request does not terminate the Spot instance. Terminate the Spot Instance Request and the Spot Instance
+
+**To terminate a Spot Instance Request**
 
 ```bash
 $ aws ec2 cancel-spot-instance-requests --spot-instance-request-id sir-wxz8bjpq
 ```
+
+**To terminate a Spot Instance using the console**
+
+Go to [EC2 Instances] (https://console.aws.amazon.com/ec2/v2/home?#Instances). 
+
+Select the instance with Name as *EC2SpotImmersionDay* and status is *running*. 
+
+Click on Actions, Instance State, then Terminate. 
 
 ### Deleting a Launch Template
 

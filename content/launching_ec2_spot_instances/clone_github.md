@@ -16,7 +16,7 @@ In order to execute the steps in the workshop, you'll need to clone the workshop
 
 	```bash
 	$ cd ec2-spot-workshops
-	$ git checkout update-launch-ec3-spot-instance-workshop
+	$ git checkout update-launch-ec2-spot-instance-workshop
 	```
 	
 1. Change into the workshop directory: **NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING**
