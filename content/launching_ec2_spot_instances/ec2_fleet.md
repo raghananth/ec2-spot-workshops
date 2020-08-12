@@ -11,6 +11,14 @@ models together. Using EC2 Fleet, you can define separate On-Demand and Spot cap
 
 EC2 Fleet could be used to provision EC2 Spot instances if multiple configuration options (i.e different EBS volume sizes for different instance types) and multiple launch templates are needed to create the EC2 instances. Unlike EC2 Auto Scaling, EC2 Fleet does not ensure that instances are spread across all AZs. In most cases, EC2 Auto Scaling is the preferred over EC2 Fleet.
 
+EC2 Fleet can be used to simplify the provision of capacity using any combination of purchase options - On Demand, Reserved and Spot. EC2 Fleet lets you scale to a large number of vCPU or instance needs and can customize the fleet based on application needs - based on number of cores or instances, or amount of memory. You can assign weightages to the different instances that is meaningful to your application scaling.
+
+EC2 Fleet can provision Spot instances based on allocation strategies.
+
+* **capacity-optimized** when Spot Instances come from the pool with optimal capacity for the number of instances that are launching.
+* **diversified** when Spot Instances are distributed across all pools.
+* **lowest-price** is the default strategy and ensures Spot Instances come from the pool with the lowest price
+
 **To create a new EC2 Fleet using the command line, run the following**
 
 ```bash

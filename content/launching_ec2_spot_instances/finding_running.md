@@ -14,7 +14,7 @@ Fleet, and an Auto Scaling group, let's go check them out.
 **To find running Spot Instances with CLI**
 
 ```bash
-$ aws ec2 describe-instances --filters Name=instance-lifecycle,Values=spot
+$ aws ec2 describe-instances --filters Name=instance-lifecycle,Values=spot --query 'Reservations[*].Instances[*].[Placement.AvailabilityZone, State.Name, InstanceId]' --output text
 ```
 
 **To find running Spot Instances using the console**

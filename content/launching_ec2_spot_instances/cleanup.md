@@ -43,6 +43,14 @@ Terminating a Spot Instance request does not terminate the Spot instance. Termin
 $ aws ec2 cancel-spot-instance-requests --spot-instance-request-id sir-wxz8bjpq
 ```
 
+**To terminate all your Spot Instance Requests using the console**
+
+Go to [EC2 Instances] (https://console.aws.amazon.com/ec2/v2/home). 
+
+Select the Spot Requests and select all the Spot requests.
+
+Click on Actions, Cancel request. 
+
 **To terminate your Spot Instance using the console**
 
 Go to [EC2 Instances] (https://console.aws.amazon.com/ec2/v2/home?#Instances). 

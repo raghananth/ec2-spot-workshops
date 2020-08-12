@@ -1,5 +1,5 @@
 {
-    "IamFleetRole": "arn:aws:iam::%accountId%:role/aws-ec2-spot-fleet-tagging-role",
+    "IamFleetRole": "%spotFleetRole%",
     "AllocationStrategy": "capacityOptimized",
     "TargetCapacity": 1,
     "ValidFrom": "2020-07-29T20:23:44Z",

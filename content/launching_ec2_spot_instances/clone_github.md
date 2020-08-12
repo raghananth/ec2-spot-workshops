@@ -61,8 +61,3 @@ In order to execute the steps in the workshop, you'll need to clone the workshop
     cloud9Environment : RunningEC2Spot
 	```
 
-	Lastly, store the account id into **accountId** variable
-
-	```bash
-	$ export accountId=$(aws sts get-caller-identity | jq -r .Account)
-	```

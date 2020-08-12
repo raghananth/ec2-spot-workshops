@@ -14,7 +14,7 @@ You can create a Spot Fleet request and specify a launch template in the instanc
 2. You will notice there are placeholder values for %publicSubnet1%, %publicSubnet2%, %launchTemplateId% and %accountId%. To update the configuration file with the outputs from the CloudFormation template, execute the following command:
 
     ```bash
-    $ sed -i.bak -e "s#%publicSubnet1%#$publicSubnet1#g" -e "s#%publicSubnet2%#$publicSubnet2#g" -e "s#%accountId%#$accountId#g" -e "s#%launchTemplateId%#$launchTemplateId#g" config.json 
+    $ sed -i.bak -e "s#%publicSubnet1%#$publicSubnet1#g" -e "s#%publicSubnet2%#$publicSubnet2#g" -e "s#%spotFleetRole%#$spotFleetRole#g" -e "s#%launchTemplateId%#$launchTemplateId#g" config.json
     ```
 
 3. Save the file and create the spot fleet:
