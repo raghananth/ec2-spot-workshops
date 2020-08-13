@@ -52,7 +52,7 @@ In order to execute the steps in the workshop, you'll need to clone the workshop
 	If successful, the output should be similar to the following:
 
 	```bash
-	spotFleetRole : arn:aws:iam::736405094009:role/LaunchEC2Spot-spotFleetRole-39D59A0GFPRW
+	spotFleetRole : arn:aws:iam::xxxxxxxxxxxx:role/LaunchEC2Spot-spotFleetRole-39D59A0GFPRW
     awsRegionId : us-west-2
     vpc : vpc-025a40d31afe98d12
     publicSubnet2 : subnet-0e6e5cc206fc084c6

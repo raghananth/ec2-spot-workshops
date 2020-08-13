@@ -1,25 +1,25 @@
 ---
 title: "Launching EC2 Spot Instances"
-date: 2019-01-31T08:51:33Z
+date: 2020-08-14T00:00:00Z
 weight: 25
 pre: "<b>⁃ </b>"
 ---
 
 ## Overview
 
-Amazon EC2 Spot instances are spare compute capacity in the AWS Cloud
-available to you at steep discounts compared to On-Demand prices. EC2
-Spot enables you to optimize your costs on the AWS cloud and scale your
-application’s throughput up to 10X for the same budget.
+Amazon EC2 Spot instances is Spare Amazon EC2 compute capacity that is available at savings of up to 90% off On-Demand prices. EC2
+Spot enables you to
 
-This lab will walk you through creating an EC2 Launch Template, and then
-using this Launch Template to launch EC2 Spot Instances the following 4
-ways: Amazon EC2 Auto Scaling groups, the EC2 RunInstances API, EC2 Spot Fleet, and 
-EC2 Fleet.
+* run EC2 instances at low, predictable prices to optimize compute cost over On-Demand and Reserved instances
+* scale the EC2 instances based on workload needs without significant increase in budget
 
-## So which of these methods should I use in my application?
-When designing your application to run on Amazon EC2, start by looking into EC2 Auto Scaling groups. With the launch of [EC2 Auto Scaling Groups With Multiple Instance Types & Purchase Options] (https://aws.amazon.com/blogs/aws/new-ec2-auto-scaling-groups-with-multiple-instance-types-purchase-options/), it has become the most comprehensive and feature-rich tool for building applications on EC2, and using Spot Instances with allocation strategies such as lowest-price and capacity-optimized. [Click here]  (https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html) to learn more about EC2 Auto Scaling groups, and check out the two workshops on this website to get hands-on experience: [Running EC2 Workloads at Scale with EC2 Auto Scaling] (https://ec2spotworkshops.com/running-amazon-ec2-workloads-at-scale.html) and [EC2 Auto Scaling with multiple instance types and purchase options] (https://ec2spotworkshops.com/ec2-auto-scaling-with-multiple-instance-types-and-purchase-options.html)
+This lab will walk you through different ways of running Amazon EC2 Spot instances :
+* Amazon EC2 Auto Scaling group
+* Amazon EC2 Fleet API
+* Spot Fleet
+* RunInstances API
 
+The lab will create a EC2 Launch template which will be utilized in all the above steps. We will end this lab with a discussion on which is the most prefered method of provisioning Amazon EC2 Spot instances.
 
 ## Pre-Requisites for this lab:
 

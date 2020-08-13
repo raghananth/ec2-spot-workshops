@@ -3,8 +3,6 @@ title = "Launching an EC2 Spot Instance via the RunInstances API"
 weight = 130
 +++
 
-## Launching an EC2 Spot Instance via the RunInstances API
-
 If there is a need to create EC2 instances in a dedicated host or Availability Zone or placement group, Run Instances API can be used to provision EC2 Spot instances. 
 
 Run Instance API supports Instance Shutdown behaviour - terminate, stop, and hibnernate. This is useful if you are targetting capacity reservation.

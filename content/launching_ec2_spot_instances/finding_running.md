@@ -3,8 +3,6 @@ title = "Finding Running Spot Instances"
 weight = 140
 +++
 
-## Finding Running Spot Instances
-
 A Spot Instance runs until it is interrupted or you terminate it
 yourself.
 
