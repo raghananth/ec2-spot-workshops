@@ -3,13 +3,20 @@ title = "Launching EC2 Spot instances via EC2 Auto Scaling Group"
 weight = 100
 +++
 
-Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.  You create collections of EC2 instances, called Auto Scaling groups.  You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size. You can specify the maximum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes above this size.
+[**Amazon EC2 Auto Scaling**](https://aws.amazon.com/ec2/autoscaling/) helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.  You create collections of EC2 instances, called Auto Scaling groups.  You can specify the minimum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes below this size. You can specify the maximum number of instances in each Auto Scaling group, and Amazon EC2 Auto Scaling ensures that your group never goes above this size.
 
 With launch templates, you can also provision capacity across multiple instance types using both On-Demand Instances and Spot Instances to achieve the desired scale, performance, and cost.
 
 Advantages of using EC2 Auto Scaling to launch EC2 instances include intergration with Elastic Load Balancer (which includes the health check for the instances), Lifecycle hooks (in case of taking actions before and after scaling activities) and Custom health check. Additionally, you can balance the instances across Availability Zones.
 
-EC2 Auto Scaling supports all the latest allocation strategies for EC2 Spot.
+EC2 Auto Scaling can provision Spot instances based on allocation strategies :
+
+* **Capacity optimized** which launches Spot instances from the deepest available Spot capacity. 
+* **Lowest price** which launches Spot instances from the lowest priced Spot capacity pools
+
+Check out [Spot allocation strategies](https://aws.amazon.com/blogs/compute/introducing-the-capacity-optimized-allocation-strategy-for-amazon-ec2-spot-instances/) to get a good grasp of how the different allocation strategies behave. 
+
+**To create a new EC2 Auto Scaling group using the command line**
 
 1. Open [**asg.json**](https://raw.githubusercontent.com/raghananth/ec2-spot-workshops/update-launch-ec2-spot-instance-workshop/workshops/launching_ec2_spot_instances/asg.json) **NOTE: CHANGE THIS LINK TO MASTER WHEN MERGING** on the Cloud9 editor and review the configuration. Pay special attention at the **Overrides** and the **InstancesDistribution** configuration blocks and try to guess how many instances of which instance type and which purchase option will be launched. Take a look at our [docs](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html#asg-allocation-strategies) to review how InstancesDistribution and allocation strategies work.
 
@@ -20,9 +27,10 @@ EC2 Auto Scaling supports all the latest allocation strategies for EC2 Spot.
     * The **prioritized** allocation strategy for on-demand instances makes AutoScaling try to launch the first instance type of your list and skip to the next instance type if for any reason it's unable to launch it (e.g. temporary unavailability of capacity). This is particularly useful if you have Reserved Instances for your baseline capacity, so AutoScaling launches the instance type matching your reservations.
     * **OnDemandBaseCapacity** is set to 2, meaning the first two EC2 instances launched by EC2 AutoScaling will be on-demand.
     * **OnDemandPercentageAboveBaseCapacity** is set to 0 so all the additional instances will be launched as Spot Instances.
-    * **SpotAllocationStrategy** is lowest-price, which instructs AutoScaling to pick the cheapest instance type on each Availability Zone.
-    * **SpotInstancePools** is 4, which tells AutoScaling to launch instances across the 4 cheapest instance types on each Availability Zone for the list of instances provided on the overrides; diversifying our fleet acquiring capacity from multiple *Spot pools* and reducing the likelihood of a large portion of our fleet to be interrupted in a short period of time.
+    * **SpotAllocationStrategy** is capacity-optimized, which instructs AutoScaling to pick the instance type from the *Spot pools* that have the deepest availability.
 
+    Diversifying the fleet to acquiring capacity from multiple *Spot pools* reduces the likelihood of a large portion of fleet from being interrupted in a short period of time
+ 
 1. You will notice there are placeholder values for **%publicSubnet1%** and **%publicSubnet2%**. To update the configuration file with the outputs from the CloudFormation template, execute the following command:
 
     ```bash
@@ -44,4 +52,6 @@ This command will not return any output if it is successful.
 
 ## Optional exercise
 
-Now that you have deployed an EC2 AutoScaling group with Mixed Instance Types and Purchase Options, take some time to manually scale out and scale in the number of instances of the group and see which instance types AutoScaling launches. Also, modify the SpotInstancePools parameter and experiment with the [capacity-optimized](https://aws.amazon.com/blogs/compute/introducing-the-capacity-optimized-allocation-strategy-for-amazon-ec2-spot-instances/) allocation strategy to get a good grasp of how the different allocation strategies behave. 
+Now that you have deployed an EC2 AutoScaling group with Mixed Instance Types and Purchase Options, take some time to manually scale out and scale in the number of instances of the group and see which instance types AutoScaling launches. 
+
+Also, modify the SpotInstancePools parameter and experiment with the **lowest-cost** allocation strategy with **SpotInstancePools** to diversify the Spot instances from launching the across the cheapest instance types on each Availability Zone for the list of instances provided on the overrides. 

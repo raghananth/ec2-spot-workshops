@@ -31,8 +31,7 @@
       "OnDemandAllocationStrategy": "prioritized",
       "OnDemandBaseCapacity": 2,
       "OnDemandPercentageAboveBaseCapacity": 0,
-      "SpotAllocationStrategy": "lowest-price",
-      "SpotInstancePools": 4
+      "SpotAllocationStrategy": "capacity-optimized"
     }
   },
   "MinSize": 2,
