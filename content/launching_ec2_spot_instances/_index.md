@@ -1,9 +1,10 @@
 ---
 title: "Launching EC2 Spot Instances"
-date: 2020-08-14T00:00:00Z
+date: 2019-01-26T00:00:00Z
 weight: 25
 pre: "<b>⁃ </b>"
 ---
+
 
 ## Overview
 
