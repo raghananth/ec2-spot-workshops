@@ -12,7 +12,7 @@ In this workshop, you will deploy the following:
 	* Supporting security groups
 * Amazon EC2 launch template
 
-You will be creating Spot instances in the following scenarios
+You will be creating Spot instances using different AWS Services :
 
 1. Amazon EC2 Auto Scaling group with On-Demand and Spot instances. The resulting architecture: ![Architecture using Amazon EC2 Auto Scaling](/images/launching_ec2_spot_instances/architecture_asg.jpg)
 

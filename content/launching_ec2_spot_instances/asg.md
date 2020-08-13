@@ -1,5 +1,5 @@
 +++
-title = "Launching EC2 Spot instances via EC2 Auto Scaling Group"
+title = "Launching EC2 Spot instances using EC2 Auto Scaling Group"
 weight = 100
 +++
 

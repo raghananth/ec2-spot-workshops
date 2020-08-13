@@ -1,5 +1,5 @@
 +++
-title = "Launching an EC2 Spot Instance via the RunInstances API"
+title = "Launching an EC2 Spot Instance using the RunInstances API"
 weight = 130
 +++
 

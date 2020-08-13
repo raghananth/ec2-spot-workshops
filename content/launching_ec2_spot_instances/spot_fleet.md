@@ -1,5 +1,5 @@
 +++
-title = "Launching EC2 Spot Instances via Spot Fleet"
+title = "Launching EC2 Spot Instances using Spot Fleet"
 weight = 120
 +++
 
