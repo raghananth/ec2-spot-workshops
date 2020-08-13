@@ -3,9 +3,7 @@ title = "Launching EC2 Spot Instances via an EC2 Fleet"
 weight = 110
 +++
 
-*EC2 Fleet* contains the configuration information to launch a fleet—or group—of instances. In a single API call, a fleet can launch
-multiple instance types across multiple Availability Zones, using the On-Demand Instance, Reserved Instance, and Spot Instance purchasing
-models together. Using EC2 Fleet, you can define separate On-Demand and Spot capacity targets, specify the instance types that work best for your applications, and specify how Amazon EC2 should distribute your fleet capacity within each purchasing model.
+[**EC2 Fleet**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html) contains the configuration information to launch a fleet—or group—of instances. In a single API call, a fleet can launch multiple instance types across multiple Availability Zones, using the On-Demand Instance, Reserved Instance, and Spot Instance purchasing models together. Using EC2 Fleet, you can define separate On-Demand and Spot capacity targets, specify the instance types that work best for your applications, and specify how Amazon EC2 should distribute your fleet capacity within each purchasing model.
 
 EC2 Fleet could be used to provision EC2 Spot instances if multiple configuration options (i.e different EBS volume sizes for different instance types) and multiple launch templates are needed to create the EC2 instances. Unlike EC2 Auto Scaling, EC2 Fleet does not ensure that instances are spread across all AZs. In most cases, EC2 Auto Scaling is the preferred over EC2 Fleet.
 

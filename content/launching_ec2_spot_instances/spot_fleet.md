@@ -3,6 +3,10 @@ title = "Launching EC2 Spot Instances via Spot Fleet"
 weight = 120
 +++
 
+[**Spot Fleet**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html) contains the configuration information to launch a fleet of Spot instances with an optional On-Demand instances.
+
+**LORUM IPSUM**
+
 You can create a Spot Fleet request and specify a launch template in the instance configuration. When Amazon EC2 fulfills the Spot Fleet request, it uses the launch parameters defined in the associated launch template.
 
 **To create a new EC2 Fleet using the command line, run the following**
