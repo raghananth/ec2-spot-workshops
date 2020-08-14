@@ -3,11 +3,18 @@ title = "Launching EC2 Spot Instances using Spot Fleet"
 weight = 120
 +++
 
-[**Spot Fleet**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html) contains the configuration information to launch a fleet of Spot instances with an optional On-Demand instances.
-
-**LORUM IPSUM**
+[**Spot Fleet**](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html) contains the configuration information to launch a fleet of Spot instances with an optional On-Demand instances. Spot Fleet can be used to make a one-time request for your desired capaciry or require it to maintain a target capacity over time. Spot Fleet request can have an expiry date, after which the request is cancelled or manually cancelled.
 
 You can create a Spot Fleet request and specify a launch template in the instance configuration. When Amazon EC2 fulfills the Spot Fleet request, it uses the launch parameters defined in the associated launch template.
+
+Spot Fleet provides three types of allocation strategies that can be used for Spot Instances:
+
+* **capacity-optimized** allocates Spot Instances from the pool with optimal capacity for the number of instances that are launching.
+* **diversified** allocates Spot Instances that are distributed across all pools.
+* **lowest-price** allocates Spot Instances from the pool with the lowest price. This is the default strategy.
+
+For more information on Spot allocation strategies, check out [Spot Fleet - Spot allocation strategies](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet.html#spot-fleet-allocation-strategy)
+
 
 **To create a new EC2 Fleet using the command line, run the following**
 

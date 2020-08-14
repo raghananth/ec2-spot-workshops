@@ -13,7 +13,7 @@ pre: "<b>⁃ </b>"
 * run EC2 instances at low, predictable prices to optimize compute cost over On-Demand and Reserved instances
 * scale the EC2 instances based on workload needs without significant increase in budget
 
-Amazon EC2 Spot instances can be provisioned by a number of Services and APIs. This lab will walk through 4 different ways :
+Amazon EC2 Spot instances can be provisioned by a number of Services and APIs. This lab will walk through 4 different ways:
 
 * Amazon EC2 Auto Scaling group
 * Amazon EC2 Fleet API

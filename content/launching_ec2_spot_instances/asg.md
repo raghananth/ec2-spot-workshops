@@ -9,12 +9,12 @@ With launch templates, you can also provision capacity across multiple instance 
 
 Advantages of using EC2 Auto Scaling to launch EC2 instances include intergration with Elastic Load Balancer (which includes the health check for the instances), Lifecycle hooks (in case of taking actions before and after scaling activities) and Custom health check. Additionally, you can balance the instances across Availability Zones.
 
-EC2 Auto Scaling can provision Spot instances based on allocation strategies :
+Amazon EC2 Auto Scaling provides two types of allocation strategies that can be used for Spot Instances:
 
-* **Capacity optimized** which launches Spot instances from the deepest available Spot capacity. 
-* **Lowest price** which launches Spot instances from the lowest priced Spot capacity pools
+* **Capacity optimized** which allocates your instances from the Spot Instance pool with optimal capacity for the number of instances that are launching.
+* **Lowest price** allocates your instances from the number (N) of Spot Instance pools that you specify and from the pools with the lowest price per unit at the time of fulfillment.
 
-Check out [Spot allocation strategies](https://aws.amazon.com/blogs/compute/introducing-the-capacity-optimized-allocation-strategy-for-amazon-ec2-spot-instances/) to get a good grasp of how the different allocation strategies behave. 
+For more information on Spot allocation strategies, check out [EC2 Auto Scaling - Spot allocation strategies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html#asg-spot-strategy).
 
 **To create a new EC2 Auto Scaling group using the command line**
 

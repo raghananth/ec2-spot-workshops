@@ -9,11 +9,13 @@ EC2 Fleet could be used to provision EC2 Spot instances if multiple configuratio
 
 EC2 Fleet can be used to simplify the provision of capacity using any combination of purchase options - On Demand, Reserved and Spot. EC2 Fleet lets you scale to a large number of vCPU or instance needs and can customize the fleet based on application needs - based on number of cores or instances, or amount of memory. You can assign weightages to the different instances that is meaningful to your application scaling.
 
-EC2 Fleet can provision Spot instances based on allocation strategies :
+EC2 Fleet provides three types of allocation strategies that can be used for Spot Instances:
 
-* **capacity-optimized** when Spot Instances come from the pool with optimal capacity for the number of instances that are launching.
-* **diversified** when Spot Instances are distributed across all pools.
-* **lowest-price** is the default strategy and ensures Spot Instances come from the pool with the lowest price
+* **capacity-optimized** allocates Spot Instances from the pool with optimal capacity for the number of instances that are launching.
+* **diversified** allocates Spot Instances that are distributed across all pools.
+* **lowest-price** allocates Spot Instances from the pool with the lowest price. This is the default strategy.
+
+For more information on Spot allocation strategies, check out [EC2 Fleet - Spot allocation strategies](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-allocation-strategy)
 
 **To create a new EC2 Fleet using the command line, run the following**
 
