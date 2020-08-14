@@ -20,13 +20,13 @@ information to launch an instance. Launch templates enable you to store launch p
         interface. For the primary network interface (eth0), this is the
         subnet in which the instance is launched.
 
-2. The variable %ami-id% should contain the latest Amazon Linux 2 AMI, and instanceProfile and instanceSecurityGroup need to be populated with the resources created by your CloudFormation stack; which are available as Stack Outputs. We can pull the latest Amazon Linux 2 AMI with the AWS CLI, and as we have loaded our CloudFormation stack outputs as environment variables on a previous step, for convenience we can use the following commands to update your configuration file:
+1. The variable %ami-id% should contain the latest Amazon Linux 2 AMI, and instanceProfile and instanceSecurityGroup need to be populated with the resources created by your CloudFormation stack; which are available as Stack Outputs. We can pull the latest Amazon Linux 2 AMI with the AWS CLI, and as we have loaded our CloudFormation stack outputs as environment variables on a previous step, for convenience we can use the following commands to update your configuration file:
 
     ```bash
     $ export ami_id=$(aws ec2 describe-images --owners amazon --filters 'Name=name,Values=amzn2-ami-hvm-2.0.????????-x86_64-gp2' 'Name=state,Values=available' --output json | jq -r '.Images |   sort_by(.CreationDate) | last(.[]).ImageId')
     ```
 
-3. Once you've gathered the data, create the launch template from the command line as follows (be sure to change the following values: **SubnetId**, **ImageId**, **InstanceType**, **Tags** - **Value**):
+1. Once you've gathered the data, create the launch template from the command line as follows (be sure to change the following values: **SubnetId**, **ImageId**, **InstanceType**, **Tags** - **Value**):
 
     ```bash
     $ aws ec2 create-launch-template --region $awsRegionId --launch-template-name SpotInstanceTemplate --version-description SpotInstanceTemplateVersion1 --launch-template-data "{\"ImageId\":\"$ami_id\",\"InstanceType\":\"m4.large\",\"TagSpecifications\":[{\"ResourceType\":\"instance\",\"Tags\":[{\"Key\":\"Name\",\"Value\":\"EC2SpotImmersionDay\"}]}]}"
@@ -48,7 +48,9 @@ information to launch an instance. Launch templates enable you to store launch p
 Note the **LaunchTemplateId** (eg. "lt-0e550c0e16efb3829") or **LaunchTemplateName** (eg. "SpotInstanceTemplate") of the newly created Launch Template for the next steps.
 {{% /notice %}}
 
-4. During the workshop, you will need to modify the configuration files to refer to the newly created LaunchTemplate. To reduce copy and paste, we will store the output **LaunchTemplateId** to environment variable.
+1. Browse to the [Launch Templates](https://console.aws.amazon.com/ec2/v2/home#LaunchTemplates) and check out your newly created launch template.
+
+1. During the workshop, you will need to modify the configuration files to refer to the newly created LaunchTemplate. To reduce copy and paste, we will store the output **LaunchTemplateId** to environment variable.
 
     ```bash
     $ export launchTemplateId=$(aws ec2 describe-launch-templates --launch-template-name SpotInstanceTemplate | jq -r ".LaunchTemplates[].LaunchTemplateId")

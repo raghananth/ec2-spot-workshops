@@ -20,7 +20,7 @@ For more information on Spot allocation strategies, check out [EC2 Fleet - Spot 
 **To create a new EC2 Fleet using the command line, run the following**
 
 ```bash
-$ aws ec2 create-fleet --launch-template-configs LaunchTemplateSpecification="{LaunchTemplateName=SpotInstanceTemplate,Version=1},Overrides=[{SubnetId=$publicSubnet1},{SubnetId=$publicSubnet2}]" --target-capacity-specification TotalTargetCapacity=4,OnDemandTargetCapacity=1,DefaultTargetCapacityType=spot
+$ aws ec2 create-fleet --launch-template-configs LaunchTemplateSpecification="{LaunchTemplateName=SpotInstanceTemplate,Version=1},Overrides=[{SubnetId=$publicSubnet1},{SubnetId=$publicSubnet2}]" --target-capacity-specification TotalTargetCapacity=4,OnDemandTargetCapacity=1,DefaultTargetCapacityType=spot --spot-options AllocationStrategy=capacity-optimized
 ```
 
 **Example return**
@@ -33,7 +33,9 @@ $ aws ec2 create-fleet --launch-template-configs LaunchTemplateSpecification="{L
 
 This EC2 Fleet has requested a total capacity of 4 instances- 1 On-Demand and 3 Spot.
 
-**Check them out by running**
+#### View the details of the EC2 Fleet
+
+**To view the EC2 fleet details using the command line, run the following**
 
 ```bash
 $ aws ec2 describe-fleets --fleet-ids fleet-e678bfc6-c2b5-4d9f-8700-03b2db30b183

@@ -40,14 +40,16 @@ For more information on Spot allocation strategies, check out [Spot Fleet - Spot
     }
     ```
 
-## Monitoring Your Spot Fleet
+#### View the details of the Spot Fleet
 
-The Spot Fleet launches Spot Instances when your maximum price exceeds
-the Spot price and capacity is available. The Spot Instances run until
-they are interrupted or you terminate them.
+The Spot Fleet launches Spot Instances when your maximum price exceeds the Spot price and capacity is available. The Spot Instances run until they are interrupted or you terminate them.
 
-To view the spot fleet details:
+**To view the spot fleet details using the command line, run the following**
 
 ```bash
 $ aws ec2 describe-spot-fleet-requests --spot-fleet-request-ids sfr-b5988c3c-e5a3-4648-ac71-88eaf0f4c11e
 ```
+
+**To view the spot fleet request in the console**
+
+You can see your Spot Fleet information in the [Spot console](https://console.aws.amazon.com/ec2spot).

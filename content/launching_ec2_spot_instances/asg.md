@@ -47,7 +47,11 @@ For more information on Spot allocation strategies, check out [EC2 Auto Scaling 
 This command will not return any output if it is successful.
 {{% /notice %}}
 
-1. Browse to the [Auto Scaling console](https://console.aws.amazon.com/ec2/autoscaling/home#AutoScalingGroups:view=details) and check out your newly created auto scaling group. Take a look at the instances it has deployed.
+#### View the details of the EC2 Auto Scaling
+
+**To view the EC2 Auto Scaling in the console**
+
+Browse to the [Auto Scaling console](https://console.aws.amazon.com/ec2/autoscaling/home#AutoScalingGroups:view=details) and check out your newly created auto scaling group. Take a look at the instances it has deployed.
 
 
 ## Optional exercise
