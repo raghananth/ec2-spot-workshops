@@ -10,8 +10,7 @@ weight = 10
 3\. This workshop has been designed to run in any public AWS Region that supports AWS Cloud9. See [Regional Products and Services](https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/) for details.
 
 {{% notice note %}}
-If you are attending an event, please run in the region suggested by the facilitators of the workshop.\
-Currently, the following AWS regions support Cloud9 and the EC2 instance types that are configured for this workshop: us-east-1 (N. Virginia), us-east-2 (Ohio), us-west-2 (Oregon), eu-west-1 (Dublin), ap-southeast-1 (Singapore), ap-northeast-1 (Tokyo)
+If you are attending an event, please run in the region suggested by the facilitators of the workshop. Currently, the following AWS regions support Cloud9 and the EC2 instance types that are configured for this workshop: us-east-1 (N. Virginia), us-east-2 (Ohio), us-west-2 (Oregon), eu-west-1 (Dublin), ap-southeast-1 (Singapore), ap-northeast-1 (Tokyo)
 {{% /notice %}}
 
 4\. During this workshop, you will install software (and dependencies) on the Amazon EC2 instances launched in your account. The software packages and/or sources you will install will be from the [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/) distribution as well as from third party repositories and sites. Please review and decide your comfort with installing these before continuing.
